@@ -1,61 +1,69 @@
-# SampleETL
+# ETL Pipeline for Country-GDP Data
 
-SampleETL là một dự án ETL (Extract, Transform, Load) đơn giản nhằm thực hiện việc thu thập, chuyển đổi và tải dữ liệu từ các nguồn khác nhau vào hệ thống lưu trữ.
+This project implements an ETL (Extract, Transform, Load) pipeline to process data about the largest banks and their market capitalization. The data is extracted from a Wikipedia page, transformed using exchange rates, and stored in both CSV and SQLite database formats.
 
-## 🚀 Tính năng chính
-- Trích xuất dữ liệu từ nhiều nguồn khác nhau (CSV, API, Database,...)
-- Chuyển đổi dữ liệu theo các quy tắc định sẵn
-- Tải dữ liệu vào hệ thống đích
-- Hỗ trợ logging và xử lý lỗi
+## 🚀 Features
+- Extracts bank market capitalization data from a Wikipedia page.
+- Transforms data by converting market capitalization values into different currencies (USD, GBP, EUR, INR).
+- Loads the transformed data into a CSV file and an SQLite database.
+- Supports running SQL queries on the database.
+- Logs the ETL process for tracking and debugging.
 
-## 📂 Cấu trúc thư mục
+## 📂 Project Structure
 ```
 SampleETL/
-│── data/               # Thư mục chứa dữ liệu đầu vào
-│── src/                # Thư mục chứa mã nguồn
-│   │── extract.py      # Module trích xuất dữ liệu
-│   │── transform.py    # Module xử lý và biến đổi dữ liệu
-│   │── load.py         # Module tải dữ liệu vào hệ thống đích
-│── config/             # Cấu hình dự án
-│── requirements.txt    # Danh sách các thư viện cần thiết
-│── README.md           # Tài liệu hướng dẫn
+│── data/                      # Directory containing data files
+│── etl.py                     # Main ETL script
+│── exchange_rate.csv          # Exchange rate data
+│── README.md                  # Project documentation
+│── Banks.db                    # SQLite database storing processed data
+│── Largest_banks_data.csv      # Processed data in CSV format
 ```
 
-## 🔧 Cài đặt
-1. Clone repository:
+## 🔧 Installation
+1. Clone the repository:
    ```bash
    git clone https://github.com/HoangCuong0811/SampleETL.git
    cd SampleETL
    ```
-2. Tạo môi trường ảo và cài đặt thư viện:
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # Trên macOS/Linux
-   venv\Scripts\activate     # Trên Windows
-   pip install -r requirements.txt
-   ```
 
-## 🛠 Cách sử dụng
-Chạy pipeline ETL:
+## 🛠 Usage
+Run the ETL pipeline:
 ```bash
-python src/main.py
+python src/etl.py
 ```
-Hoặc có thể chạy từng bước riêng lẻ:
+Alternatively, run specific steps separately:
 ```bash
-python src/extract.py
-python src/transform.py
-python src/load.py
+python src/etl.py extract
+python src/etl.py transform
+python src/etl.py load
 ```
 
-## 📌 Yêu cầu hệ thống
+## 📜 ETL Process Details
+### Extract
+- Scrapes data from a Wikipedia page containing a list of the largest banks.
+- Uses BeautifulSoup to parse the HTML and extract relevant table data.
+- Saves extracted data into a Pandas DataFrame.
+
+### Transform
+- Reads exchange rate data from `exchange_rate.csv`.
+- Converts market capitalization values from USD to GBP, EUR, and INR.
+- Ensures proper data formatting and cleaning.
+
+### Load
+- Saves the transformed data into a CSV file (`Largest_banks_data.csv`).
+- Stores the data in an SQLite database (`Banks.db`).
+- Allows executing SQL queries for further analysis.
+
+## 📌 System Requirements
 - Python 3.x
-- Các thư viện cần thiết được liệt kê trong `requirements.txt`
+- Required libraries (listed in `requirements.txt`):
+  - pandas
+  - numpy
+  - requests
+  - beautifulsoup4
+  - sqlite3
 
-## 📜 Giấy phép
-Dự án này được phát hành dưới giấy phép MIT. Xem chi tiết trong [LICENSE](LICENSE).
+## 🤝 Contributing
+Contributions are welcome! Please fork the repository and submit a pull request.
 
-## 🤝 Đóng góp
-Mọi đóng góp đều được hoan nghênh! Nếu bạn muốn đóng góp, hãy fork repository này và tạo pull request.
-
-## 📬 Liên hệ
-Nếu bạn có bất kỳ câu hỏi nào, vui lòng liên hệ qua email: hoangcuong0811@example.com.
