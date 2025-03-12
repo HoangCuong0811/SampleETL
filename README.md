@@ -12,8 +12,8 @@ This project implements an ETL (Extract, Transform, Load) pipeline to process da
 ## 📂 Project Structure
 ```
 SampleETL/
-│── data/                      # Directory containing data files
-│── etl.py                     # Main ETL script
+│── code_log.txt               # Code log for tracking
+│── bank_project.py            # Main ETL script
 │── exchange_rate.csv          # Exchange rate data
 │── README.md                  # Project documentation
 │── Banks.db                    # SQLite database storing processed data
